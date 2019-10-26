@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/26 00:36:54 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 00:39:44 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,18 @@
 # define HEIGHT 1080
 # define NAME "fdf"
 
-#include "libft/libft.h"
-#include <fcntl.h>
-#include <math.h>
-#include <mlx.h>
+# include "libft/libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <mlx.h>
+
+typedef struct	s_vec
+{
+	int	x;
+	int	y;
+	int	z;
+	int color;
+}				t_vec;
 
 typedef struct	s_map
 {
@@ -45,5 +53,6 @@ void	fdf(int	fd);
 void	readinput(t_fdf *info, int fd, char *line);
 void	initstruct(t_fdf *info);
 void	destroystruct(t_fdf *info);
+int		isvalid(char *segment);
 
 #endif

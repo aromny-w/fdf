@@ -6,7 +6,7 @@
 #    By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/08 15:50:07 by aromny-w          #+#    #+#              #
-#    Updated: 2019/10/26 00:18:41 by aromny-w         ###   ########.fr        #
+#    Updated: 2019/10/27 00:38:36 by aromny-w         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 FLAG = -Wall -Wextra -Werror
 FW = -framework OpenGL -framework AppKit
 
-SRC = fdf.c initstruct.c destroystruct.c readinput.c
+SRC = fdf.c initstruct.c isvalid.c destroystruct.c readinput.c
 
 OBJ = $(SRC:.c=.o)
 
