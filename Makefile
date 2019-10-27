@@ -6,7 +6,7 @@
 #    By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/08 15:50:07 by aromny-w          #+#    #+#              #
-#    Updated: 2019/10/27 19:35:08 by aromny-w         ###   ########.fr        #
+#    Updated: 2019/10/27 19:41:26 by aromny-w         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC = gcc
 FLAG = -Wall -Wextra -Werror -g
 FW = -framework OpenGL -framework AppKit
 
-SRC = fdf.c initmlx.c veccount.c vecparse.c destroystruct.c readinput.c
+SRC = fdf.c initmlx.c veccount.c vecparse.c destroystruct.c readinput.c \
+	  printmatrix.c
 
 OBJ = $(SRC:.c=.o)
 

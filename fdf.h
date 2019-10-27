@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 19:34:19 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 19:41:10 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int		veccount(char *str);
 int		vecparse(t_fdf *info, char *str, int x, int y);
 void	initmlx(t_fdf *info);
 void	destroystruct(t_fdf *info, int status, int i);
+void	printmatrix(t_map map); //debug
 
 #endif
