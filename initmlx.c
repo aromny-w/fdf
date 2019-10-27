@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initstruct.c                                       :+:      :+:    :+:   */
+/*   initmlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:46:09 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 17:38:17 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 19:34:35 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	initstruct(t_fdf *info)
+void	initmlx(t_fdf *info)
 {
-	ft_memset(info, 0, sizeof(t_fdf));
 	if (!(info->mlx_ptr = mlx_init()) ||
 		!(info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH, HEIGHT, NAME)) ||
 		!(info->img_ptr = mlx_new_image(info->mlx_ptr, WIDTH, HEIGHT)))

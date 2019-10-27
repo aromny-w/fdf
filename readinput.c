@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 17:16:05 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 19:33:09 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		readinput(t_fdf *info, int fd, char *line)
 
 	buf = NULL;
 	if (fd == -1)
-		exit(EXIT_FAILURE);
+		destroystruct(info, 1, 0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		ft_lstadd(&buf, ft_lstnew(line, ft_strlen(line) + 1));

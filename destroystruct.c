@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:58:10 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 17:28:32 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 19:32:09 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	destroystruct(t_fdf *info, int status, int i)
 			free(info->map.grid[i]);
 		free(info->map.grid);
 	}
-	exit(status);
+	if (status == 0 || status == 1)
+		exit(status);
 }
