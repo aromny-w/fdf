@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:58:10 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/26 00:36:34 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 15:45:51 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	destroystruct(t_fdf *info)
 {
+	(void)info;
 	if (info->win_ptr)
 		mlx_destroy_window(info->mlx_ptr, info->win_ptr);
 	if (info->img_ptr)

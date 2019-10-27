@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 00:39:11 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 15:34:02 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	checkcolor(char **str)
 {
 	int nbr;
 
-	if (!ft_isdigit(**str))
+	if (!ft_isxdigit(**str))
 		return (0);
 	while (ft_isxdigit(**str) && (nbr >= 0x000000 && nbr <= 0xffffff))
 		nbr = 10 * nbr + todecimal(*(*str)++);
@@ -43,27 +43,34 @@ static int	checknumber(char **str)
 	nbr = 0;
 	sign = 1;
 	if (**str == '+' || **str == '-')
-		if (*(*str++) == '-')
+		if (*(*str)++ == '-')
 			sign = -1;
 	if (!ft_isdigit(**str))
 		return (0);
 	while (ft_isdigit(**str) &&
 	(nbr * sign >= INT_MIN && nbr * sign <= INT_MAX))
 		nbr = 10 * nbr + (*(*str)++ - '0');
-	if (**str || !(nbr * sign >= INT_MIN && nbr * sign <= INT_MAX))
+	if (!(nbr * sign >= INT_MIN && nbr * sign <= INT_MAX))
 		return (0);
 	return (1);
 }
 
-int			isvalid(char *segment)
+int			isvalid(char *str)
 {
-	if (!checknumber(&segment))
+	if (!checknumber(&str))
 		return (0);
-	if (*segment == ',')
+	if (!*str)
+		return (1);
+	if (*str++ == ',')
 	{
-		segment++;
-		if (!checkcolor(&segment))
+		if (*str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
+			str += 2;
+		else
+			return (0);
+		if (!checkcolor(&str) || *str)
 			return (0);
 	}
+	else
+		return (0);
 	return (1);
 }

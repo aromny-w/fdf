@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 00:39:57 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 15:47:20 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	countsegments(char *str)
 	int		count;
 
 	count = 0;
+	while (*str == ' ')
+		str++;
 	while (*str)
 	{
 		count++;
@@ -88,8 +90,7 @@ void		readinput(t_fdf *info, int fd, char *line)
 	info->map.width = countsegments(buf->content);
 	info->map.height = ft_lstsize(buf);
 	if (!validate(info, buf))
-		exit(-1);
-	ft_printf("test");
+		;//
 	ft_lstdel(&buf, del);
 	close(fd);
 }
