@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:29:53 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 15:46:42 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 17:40:23 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 static int	close_win(t_fdf *info)
 {
-	destroystruct(info);
-	exit(EXIT_SUCCESS);
+	destroystruct(info, 0, info->map.height);
+	return (1);
 }
 
 void		fdf(int fd)
 {
 	t_fdf	info;
 
+	ft_memset(&info, 0, sizeof(t_fdf));
 	readinput(&info, fd, NULL);
 	initstruct(&info);
 	//

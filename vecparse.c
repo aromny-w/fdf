@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isvalid.c                                          :+:      :+:    :+:   */
+/*   vecparse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 15:34:02 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 17:27:34 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@ static int	todecimal(char c)
 		return (c - 'A' + 10);
 }
 
-static int	checkcolor(char **str)
+static int	parsecolor(t_fdf *info, char **str, int x, int y)
 {
 	int nbr;
 
 	if (!ft_isxdigit(**str))
 		return (0);
 	while (ft_isxdigit(**str) && (nbr >= 0x000000 && nbr <= 0xffffff))
-		nbr = 10 * nbr + todecimal(*(*str)++);
+		nbr = 16 * nbr + todecimal(*(*str)++);
 	if (**str || !(nbr >= 0x000000 && nbr <= 0xffffff))
 		return (0);
+	info->map.grid[y][x].color = nbr;
 	return (1);
 }
 
-static int	checknumber(char **str)
+static int	parsenumber(t_fdf *info, char **str, int x, int y)
 {
 	long	nbr;
 	int		sign;
@@ -52,12 +53,15 @@ static int	checknumber(char **str)
 		nbr = 10 * nbr + (*(*str)++ - '0');
 	if (!(nbr * sign >= INT_MIN && nbr * sign <= INT_MAX))
 		return (0);
+	info->map.grid[y][x].x = x;
+	info->map.grid[y][x].y = y;
+	info->map.grid[y][x].z = nbr * sign;
 	return (1);
 }
 
-int			isvalid(char *str)
+int			vecparse(t_fdf *info, char *str, int x, int y)
 {
-	if (!checknumber(&str))
+	if (!parsenumber(info, &str, x, y))
 		return (0);
 	if (!*str)
 		return (1);
@@ -67,7 +71,7 @@ int			isvalid(char *str)
 			str += 2;
 		else
 			return (0);
-		if (!checkcolor(&str) || *str)
+		if (!parsecolor(info, &str, x, y) || *str)
 			return (0);
 	}
 	else

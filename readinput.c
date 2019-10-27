@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 15:47:20 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/27 17:16:05 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,53 +25,44 @@ static void	clearline(char **line, size_t i)
 	free(line);
 }
 
-static int	countsegments(char *str)
-{
-	int		count;
-
-	count = 0;
-	while (*str == ' ')
-		str++;
-	while (*str)
-	{
-		count++;
-		if (*str == '-')
-			str++;
-		while (ft_isdigit(*str))
-			str++;
-		if (*str == ',')
-			if (*++str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
-			{
-				str += 2;
-				while (ft_isxdigit(*str))
-					str++;
-			}
-		while (*str == ' ')
-			str++;
-	}
-	return (count);
-}
-
-static int	validate(t_fdf *info, t_list *buf)
+static int	lineparse(t_fdf *info, t_list *buf)
 {
 	char	**line;
+	int		j;
 	int		i;
 
+	j = 0;
 	while (buf)
 	{
 		i = -1;
-		if (info->map.width != countsegments(buf->content) ||
+		if (info->map.width != veccount(buf->content) ||
 		!(line = ft_strsplit(buf->content, ' ')))
 			return (0);
 		while (++i < info->map.width)
-			if (!isvalid(line[i]))
+			if (!vecparse(info, line[i], i, j))
 				break ;
 		clearline(line, info->map.width);
 		if (i != info->map.width)
 			return (0);
+		j++;
 		buf = buf->next;
 	}
 	return (1);
+}
+
+static void	createmap(t_fdf *info, int width, int height)
+{
+	int	i;
+
+	if (!(info->map.grid = (t_vec **)malloc(sizeof (t_vec *) * height)))
+		return (destroystruct(info, 1, 0));
+	i = -1;
+	while (++i < height)
+	{
+		if (!(info->map.grid[i] = (t_vec *)malloc(sizeof(t_vec) * width)))
+			return (destroystruct(info, 1, i));
+		ft_memset(info->map.grid[i], 0, width);
+	}
 }
 
 void		readinput(t_fdf *info, int fd, char *line)
@@ -87,10 +78,11 @@ void		readinput(t_fdf *info, int fd, char *line)
 		free(line);
 	}
 	ft_lstrev(&buf);
-	info->map.width = countsegments(buf->content);
+	info->map.width = veccount(buf->content);
 	info->map.height = ft_lstsize(buf);
-	if (!validate(info, buf))
-		;//
+	createmap(info, info->map.width, info->map.height);
+	if (!lineparse(info, buf))
+		destroystruct(info, 1, info->map.height);
 	ft_lstdel(&buf, del);
 	close(fd);
 }

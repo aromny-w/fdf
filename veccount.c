@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroystruct.c                                    :+:      :+:    :+:   */
+/*   veccount.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/25 22:58:10 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 17:28:32 by aromny-w         ###   ########.fr       */
+/*   Created: 2019/10/27 16:34:32 by aromny-w          #+#    #+#             */
+/*   Updated: 2019/10/27 16:34:56 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	destroystruct(t_fdf *info, int status, int i)
+int	veccount(char *str)
 {
-	if (info->win_ptr)
-		mlx_destroy_window(info->mlx_ptr, info->win_ptr);
-	if (info->img_ptr)
-		mlx_destroy_image(info->mlx_ptr, info->img_ptr);
-	if (status == 1)
-		ft_putstr_fd("Error\n", 2);
-	if (info->map.grid)
+	int		count;
+
+	count = 0;
+	while (*str == ' ')
+		str++;
+	while (*str)
 	{
-		while (i--)
-			free(info->map.grid[i]);
-		free(info->map.grid);
+		count++;
+		if (*str == '-')
+			str++;
+		while (ft_isdigit(*str))
+			str++;
+		if (*str == ',')
+			if (*++str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
+			{
+				str += 2;
+				while (ft_isxdigit(*str))
+					str++;
+			}
+		while (*str == ' ')
+			str++;
 	}
-	exit(status);
+	return (count);
 }
