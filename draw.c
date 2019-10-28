@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printmatrix.c                                      :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 19:36:25 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/28 23:03:03 by aromny-w         ###   ########.fr       */
+/*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
+/*   Updated: 2019/10/28 23:32:37 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	printmatrix(t_map map)
+static void	drawline(t_fdf *info, t_point s1, t_point s2)
+{
+	;
+}
+
+void		draw(t_fdf *info)
 {
 	int	i;
 	int	j;
 
 	j = -1;
-	while (++j < map.height)
+	while (++j < info->map.height)
 	{
 		i = -1;
-		while (++i < map.width)
-			ft_printf("[x:%2d y:%2d z:%2d color:%#8X] ", map.matrix[j][i].x, map.matrix[j][i].y, map.matrix[j][i].z, map.matrix[j][i].color);
-		ft_printf("\n");
+		while (++i < info->map.width)
+		{
+			if (i + 1 < info->map.width)
+				drawline(info, info->map.matrix[j][i], info->map.matrix[j][i + 1]);
+			if (j + 1 < info->map.height)
+				drawline(info, info->map.matrix[j][i], info->map.matrix[j + 1][i]);
+		}
 	}
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img_ptr, 0, 0);
 }

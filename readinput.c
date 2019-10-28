@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 19:33:09 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/28 23:04:03 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static void	del(void *elem, size_t size)
 	free(elem);
 }
 
-static void	clearline(char **line, size_t i)
+static void	clearvec(char **vec, size_t i)
 {
 	while (i--)
-		free(line[i]);
-	free(line);
+		free(vec[i]);
+	free(vec);
 }
 
-static int	lineparse(t_fdf *info, t_list *buf)
+static int	vecparse(t_fdf *info, t_list *buf)
 {
-	char	**line;
+	char	**vec;
 	int		j;
 	int		i;
 
@@ -35,13 +35,13 @@ static int	lineparse(t_fdf *info, t_list *buf)
 	while (buf)
 	{
 		i = -1;
-		if (info->map.width != veccount(buf->content) ||
-		!(line = ft_strsplit(buf->content, ' ')))
+		if (info->map.width != scalarcount(buf->content) ||
+		!(vec = ft_strsplit(buf->content, ' ')))
 			return (0);
 		while (++i < info->map.width)
-			if (!vecparse(info, line[i], i, j))
+			if (!scalarparse(info, vec[i], i, j))
 				break ;
-		clearline(line, info->map.width);
+		clearvec(vec, info->map.width);
 		if (i != info->map.width)
 			return (0);
 		j++;
@@ -50,18 +50,18 @@ static int	lineparse(t_fdf *info, t_list *buf)
 	return (1);
 }
 
-static void	createmap(t_fdf *info, int width, int height)
+static void	initmatrix(t_fdf *info, int width, int height)
 {
 	int	i;
 
-	if (!(info->map.grid = (t_vec **)malloc(sizeof (t_vec *) * height)))
+	if (!(info->map.matrix = (t_point **)malloc(sizeof(t_point *) * height)))
 		return (destroystruct(info, 1, 0));
 	i = -1;
 	while (++i < height)
 	{
-		if (!(info->map.grid[i] = (t_vec *)malloc(sizeof(t_vec) * width)))
+		if (!(info->map.matrix[i] = (t_point *)malloc(sizeof(t_point) * width)))
 			return (destroystruct(info, 1, i));
-		ft_memset(info->map.grid[i], 0, width);
+		ft_memset(info->map.matrix[i], 0, width);
 	}
 }
 
@@ -78,10 +78,10 @@ void		readinput(t_fdf *info, int fd, char *line)
 		free(line);
 	}
 	ft_lstrev(&buf);
-	info->map.width = veccount(buf->content);
+	info->map.width = scalarcount(buf->content);
 	info->map.height = ft_lstsize(buf);
-	createmap(info, info->map.width, info->map.height);
-	if (!lineparse(info, buf))
+	initmatrix(info, info->map.width, info->map.height);
+	if (!vecparse(info, buf))
 		destroystruct(info, 1, info->map.height);
 	ft_lstdel(&buf, del);
 	close(fd);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vecparse.c                                         :+:      :+:    :+:   */
+/*   scalarparse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/27 17:27:34 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/28 23:06:17 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	parsecolor(t_fdf *info, char **str, int x, int y)
 		nbr = 16 * nbr + todecimal(*(*str)++);
 	if (**str || !(nbr >= 0x000000 && nbr <= 0xffffff))
 		return (0);
-	info->map.grid[y][x].color = nbr;
+	info->map.matrix[y][x].color = nbr;
 	return (1);
 }
 
@@ -53,13 +53,13 @@ static int	parsenumber(t_fdf *info, char **str, int x, int y)
 		nbr = 10 * nbr + (*(*str)++ - '0');
 	if (!(nbr * sign >= INT_MIN && nbr * sign <= INT_MAX))
 		return (0);
-	info->map.grid[y][x].x = x;
-	info->map.grid[y][x].y = y;
-	info->map.grid[y][x].z = nbr * sign;
+	info->map.matrix[y][x].x = x;
+	info->map.matrix[y][x].y = y;
+	info->map.matrix[y][x].z = nbr * sign;
 	return (1);
 }
 
-int			vecparse(t_fdf *info, char *str, int x, int y)
+int			scalarparse(t_fdf *info, char *str, int x, int y)
 {
 	if (!parsenumber(info, &str, x, y))
 		return (0);
