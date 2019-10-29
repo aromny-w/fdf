@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/28 23:04:03 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/29 21:44:34 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	vecparse(t_fdf *info, t_list *buf)
 	while (buf)
 	{
 		i = -1;
-		if (info->map.width != scalarcount(buf->content) ||
+		if (info->map.width != pointcount(buf->content) ||
 		!(vec = ft_strsplit(buf->content, ' ')))
 			return (0);
 		while (++i < info->map.width)
-			if (!scalarparse(info, vec[i], i, j))
+			if (!pointparse(info, vec[i], i, j))
 				break ;
 		clearvec(vec, info->map.width);
 		if (i != info->map.width)
@@ -78,7 +78,7 @@ void		readinput(t_fdf *info, int fd, char *line)
 		free(line);
 	}
 	ft_lstrev(&buf);
-	info->map.width = scalarcount(buf->content);
+	info->map.width = pointcount(buf->content);
 	info->map.height = ft_lstsize(buf);
 	initmatrix(info, info->map.width, info->map.height);
 	if (!vecparse(info, buf))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scalarparse.c                                      :+:      :+:    :+:   */
+/*   pointparse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/28 23:06:17 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/29 21:43:49 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ static int	parsenumber(t_fdf *info, char **str, int x, int y)
 	info->map.matrix[y][x].x = x;
 	info->map.matrix[y][x].y = y;
 	info->map.matrix[y][x].z = nbr * sign;
+	info->map.matrix[y][x].color = 0xffffff;
 	return (1);
 }
 
-int			scalarparse(t_fdf *info, char *str, int x, int y)
+int			pointparse(t_fdf *info, char *str, int x, int y)
 {
 	if (!parsenumber(info, &str, x, y))
 		return (0);
