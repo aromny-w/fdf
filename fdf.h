@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 21:43:56 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/29 23:13:16 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		pointcount(char *str);
 int		pointparse(t_fdf *info, char *str, int x, int y);
 void	initmlx(t_fdf *info);
 void	draw(t_fdf *info);
-t_point	project(t_fdf *info, t_point s);
+t_point	pointproject(t_fdf *info, t_point s);
 void	destroystruct(t_fdf *info, int status, int i);
 void	printmatrix(t_map map); //debug
 
