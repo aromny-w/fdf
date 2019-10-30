@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 21:12:17 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 17:46:19 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:25:02 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_point		pointproject(t_fdf *info, t_point s)
 {
 	int zoom;
 
-	zoom = 30;
+	zoom = 50;
 	s.x *= zoom;
 	s.y *= zoom;
 	s.z *= zoom / 5;
