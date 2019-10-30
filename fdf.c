@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:29:53 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 21:41:22 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 20:19:53 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		fdf(int fd)
 
 	ft_memset(&info, 0, sizeof(t_fdf));
 	readinput(&info, fd, NULL);
-	initmlx(&info);
+	initstruct(&info);
 	//printmatrix(info.map);
 	draw(&info);
 	mlx_hook(info.win_ptr, 17, 1L << 17, close_win, &info);

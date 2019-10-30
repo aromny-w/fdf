@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 23:13:16 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 20:27:41 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,36 @@ typedef struct	s_point
 	int 	color;
 }				t_point;
 
+typedef struct	s_cam
+{
+	;
+}				t_cam;
+
 typedef struct	s_map
 {
+	t_point	**matrix;
 	int		width;
 	int		height;
-	t_point	**matrix;
-	//
 }				t_map;
 
 typedef struct	s_fdf
 {
+	t_map	map;
+	t_cam	cam;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
-	char	*data_addr;
+	int		*data_addr;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-	t_map	map;
-	//
 }				t_fdf;
 
 void	fdf(int	fd);
 void	readinput(t_fdf *info, int fd, char *line);
 int		pointcount(char *str);
 int		pointparse(t_fdf *info, char *str, int x, int y);
-void	initmlx(t_fdf *info);
+void	initstruct(t_fdf *info);
 void	draw(t_fdf *info);
 t_point	pointproject(t_fdf *info, t_point s);
 void	destroystruct(t_fdf *info, int status, int i);
