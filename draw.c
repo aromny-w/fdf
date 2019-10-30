@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 22:30:39 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 23:55:00 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		draw(t_fdf *info)
 	int	i;
 	int	j;
 
+	ft_bzero(info->data_addr, WIDTH * HEIGHT * 4);
 	j = -1;
 	while (++j < info->map.height)
 	{

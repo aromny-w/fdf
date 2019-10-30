@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 21:12:17 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 22:47:09 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/31 00:16:45 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,23 @@ static void	rotatealpha(t_point *prime, t_point point, float alpha)
 	prime->z = -point.y * sin(alpha) + point.z * cos(alpha);
 }
 
-void		pointrotate(t_point *point)
+void		pointrotate(t_point *point, t_cam cam)
 {
-	rotatealpha(point, *point, 0);
-	rotatebeta(point, *point, 0);
-	rotategamma(point, *point, 0);
+	rotatealpha(point, *point, cam.x_axis);
+	rotatebeta(point, *point, cam.y_axis);
+	rotategamma(point, *point, cam.z_axis);
 }
 
 t_point		pointproject(t_fdf *info, t_point point)
 {
-	int zoom;
-
-	zoom = 50;
-	point.x *= zoom;
-	point.y *= zoom;
-	point.z *= zoom / 5;
-	point.x -= info->map.width * zoom / 2;
-	point.y -= info->map.height * zoom / 2;
-	pointrotate(&point);
+	point.x *= info->cam.dist;
+	point.y *= info->cam.dist;
+	point.z *= info->cam.dist / 1;
+	point.x -= info->map.width * info->cam.dist / 2;
+	point.y -= info->map.height * info->cam.dist / 2;
+	pointrotate(&point, info->cam);
 	isometric(&point, point);
-	point.x += WIDTH / 2;
-	point.y += HEIGHT / 2;
+	point.x += WIDTH / 2 + info->cam.x_offset;
+	point.y += HEIGHT / 2 + info->cam.y_offset;
 	return (point);
 }

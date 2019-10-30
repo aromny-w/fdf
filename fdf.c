@@ -6,13 +6,13 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:29:53 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 22:30:58 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 23:41:02 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	close_win(t_fdf *info)
+static int	closewin(t_fdf *info)
 {
 	destroystruct(info, 0, info->map.height);
 	exit(EXIT_SUCCESS);
@@ -27,7 +27,8 @@ void		fdf(int fd)
 	initstruct(&info);
 	//printmatrix(info.map);
 	draw(&info);
-	mlx_hook(info.win_ptr, 17, 1L << 17, close_win, &info);
+	mlx_hook(info.win_ptr, 2, 0, hotkeys, &info);
+	mlx_hook(info.win_ptr, 17, 1L << 17, closewin, &info);
 	mlx_loop(info.mlx_ptr);
 }
 

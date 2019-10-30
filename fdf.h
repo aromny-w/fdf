@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 22:26:22 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/31 00:14:35 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct	s_point
 typedef struct	s_cam
 {
 	int		dist;
-	float	alpha;
-	float	beta;
-	float	gamma;
+	int		x_offset;
+	int		y_offset;
+	double	x_axis;
+	double	y_axis;
+	double	z_axis;
 }				t_cam;
 
 typedef struct	s_map
@@ -58,13 +60,14 @@ typedef struct	s_fdf
 }				t_fdf;
 
 void	fdf(int	fd);
+void	initstruct(t_fdf *info);
+void	destroystruct(t_fdf *info, int status, int i);
 void	readinput(t_fdf *info, int fd, char *line);
 int		pointcount(char *str);
 int		pointparse(t_fdf *info, char *str, int x, int y);
-void	initstruct(t_fdf *info);
 void	draw(t_fdf *info);
 t_point	pointproject(t_fdf *info, t_point s);
-void	destroystruct(t_fdf *info, int status, int i);
+int		hotkeys(int key, t_fdf *info);
 void	printmatrix(t_map map); //debug
 
 #endif
