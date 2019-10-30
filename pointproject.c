@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 21:12:17 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 23:59:44 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:46:19 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	isometric(t_point *s, int x, int y)
 {
-	s->x = (x - y) * cos(0.523599);
-	s->y = (x + y) * sin(0.523599) + s->z;
+	s->x = (x - y) * cos(30 * M_PI / 180);
+	s->y = (x + y) * sin(30 * M_PI / 180) - s->z;
 }
 
 static void	rotate_z(t_point *s, int x, int y, double gamma)
@@ -40,9 +40,10 @@ t_point		pointproject(t_fdf *info, t_point s)
 {
 	int zoom;
 
-	zoom = 40;
+	zoom = 30;
 	s.x *= zoom;
 	s.y *= zoom;
+	s.z *= zoom / 5;
 	s.x -= info->map.width * zoom / 2;
 	s.y -= info->map.height * zoom / 2;
 	rotate_x(&s, s.y, 0);
