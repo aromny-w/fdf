@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 21:12:17 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 20:27:55 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 22:47:09 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,47 @@ static void	isometric(t_point *prime, t_point point)
 	prime->z = point.z;
 }
 
-static void	rotate_z(t_point *s, int x, int y, double gamma)
+static void	rotategamma(t_point *prime, t_point point, float gamma)
 {
-	s->x = x * cos(gamma) - y * sin(gamma);
-	s->y = x * sin(gamma) + y * cos(gamma);
+	prime->x = point.x * cos(gamma) - point.y * sin(gamma);
+	prime->y = point.x * sin(gamma) + point.y * cos(gamma);
+	prime->z = point.z;
 }
 
-static void	rotate_y(t_point *s, int x, double beta)
+static void	rotatebeta(t_point *prime, t_point point, float beta)
 {
-	s->x = x * cos(beta) + s->z * sin(beta);
-	s->z = -x * sin(beta) + s->z * cos(beta);
+	prime->x = point.x * cos(beta) + point.z * sin(beta);
+	prime->y = point.y;
+	prime->z = -point.x * sin(beta) + point.z * cos(beta);
 }
 
-static void	rotate_x(t_point *s, int y, double alpha)
+static void	rotatealpha(t_point *prime, t_point point, float alpha)
 {
-	s->y = y * cos(alpha) + s->z * sin(alpha);
-	s->z = -y * sin(alpha) + s->z * cos(alpha);
+	prime->x = point.x;
+	prime->y = point.y * cos(alpha) + point.z * sin(alpha);
+	prime->z = -point.y * sin(alpha) + point.z * cos(alpha);
 }
-/*
-void		rotationmatrix(t_point *prime, t_point point)
+
+void		pointrotate(t_point *point)
 {
-	;
+	rotatealpha(point, *point, 0);
+	rotatebeta(point, *point, 0);
+	rotategamma(point, *point, 0);
 }
-*/
-t_point		pointproject(t_fdf *info, t_point s)
+
+t_point		pointproject(t_fdf *info, t_point point)
 {
 	int zoom;
 
 	zoom = 50;
-	s.x *= zoom;
-	s.y *= zoom;
-	s.z *= zoom / 5;
-	s.x -= info->map.width * zoom / 2;
-	s.y -= info->map.height * zoom / 2;
-	rotate_x(&s, s.y, 0);
-	rotate_y(&s, s.x, 0);
-	rotate_z(&s, s.x, s.y, 0);
-	isometric(&s, s);
-	s.x += WIDTH / 2;
-	s.y += HEIGHT / 2;
-	return (s);
+	point.x *= zoom;
+	point.y *= zoom;
+	point.z *= zoom / 5;
+	point.x -= info->map.width * zoom / 2;
+	point.y -= info->map.height * zoom / 2;
+	pointrotate(&point);
+	isometric(&point, point);
+	point.x += WIDTH / 2;
+	point.y += HEIGHT / 2;
+	return (point);
 }

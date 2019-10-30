@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 20:27:41 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/30 22:26:22 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ typedef struct	s_point
 
 typedef struct	s_cam
 {
-	;
+	int		dist;
+	float	alpha;
+	float	beta;
+	float	gamma;
 }				t_cam;
 
 typedef struct	s_map
