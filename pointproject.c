@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 21:12:17 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 00:16:45 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:58:50 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ static void	isometric(t_point *prime, t_point point)
 	prime->z = point.z;
 }
 
-static void	rotategamma(t_point *prime, t_point point, float gamma)
+static void	rotatezaxis(t_point *prime, t_point point, float gamma)
 {
 	prime->x = point.x * cos(gamma) - point.y * sin(gamma);
 	prime->y = point.x * sin(gamma) + point.y * cos(gamma);
 	prime->z = point.z;
 }
 
-static void	rotatebeta(t_point *prime, t_point point, float beta)
+static void	rotateyaxis(t_point *prime, t_point point, float beta)
 {
 	prime->x = point.x * cos(beta) + point.z * sin(beta);
 	prime->y = point.y;
 	prime->z = -point.x * sin(beta) + point.z * cos(beta);
 }
 
-static void	rotatealpha(t_point *prime, t_point point, float alpha)
+static void	rotatexaxis(t_point *prime, t_point point, float alpha)
 {
 	prime->x = point.x;
 	prime->y = point.y * cos(alpha) + point.z * sin(alpha);
@@ -42,9 +42,9 @@ static void	rotatealpha(t_point *prime, t_point point, float alpha)
 
 void		pointrotate(t_point *point, t_cam cam)
 {
-	rotatealpha(point, *point, cam.x_axis);
-	rotatebeta(point, *point, cam.y_axis);
-	rotategamma(point, *point, cam.z_axis);
+	rotatexaxis(point, *point, cam.alpha);
+	rotateyaxis(point, *point, cam.beta);
+	rotatezaxis(point, *point, cam.gamma);
 }
 
 t_point		pointproject(t_fdf *info, t_point point)
@@ -57,6 +57,6 @@ t_point		pointproject(t_fdf *info, t_point point)
 	pointrotate(&point, info->cam);
 	isometric(&point, point);
 	point.x += WIDTH / 2 + info->cam.x_offset;
-	point.y += HEIGHT / 2 + info->cam.y_offset;
+	point.y += (HEIGHT + info->map.height * info->cam.dist) / 2 + info->cam.y_offset;
 	return (point);
 }

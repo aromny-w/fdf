@@ -6,11 +6,17 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/30 23:55:00 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 00:00:49 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	drawlegend(t_fdf *info)
+{
+	ft_bzero(info->data_addr, info->size_line * 300);
+	ft_memset(info->data_addr + 300 * info->size_line, 0xffffff, info->size_line);
+}
 
 static void	drawline(t_fdf *info, t_point p1, t_point p2)
 {
@@ -18,8 +24,8 @@ static void	drawline(t_fdf *info, t_point p1, t_point p2)
 	int		step[2];
 	int		error[2];
 
-	delta[0] = abs(p1.x - p2.x);
-	delta[1] = abs(p1.y - p2.y);
+	delta[0] = ft_abs(p1.x - p2.x);
+	delta[1] = ft_abs(p1.y - p2.y);
 	step[0] = p1.x < p2.x ? 1 : -1;
 	step[1] = p1.y < p2.y ? 1 : -1;
 	error[0] = (delta[0] > delta[1] ? delta[0] : -delta[1]) / 2;
@@ -46,7 +52,7 @@ void		draw(t_fdf *info)
 	int	i;
 	int	j;
 
-	ft_bzero(info->data_addr, WIDTH * HEIGHT * 4);
+	ft_bzero(info->data_addr, info->size_line * HEIGHT);
 	j = -1;
 	while (++j < info->map.height)
 	{
@@ -63,5 +69,7 @@ void		draw(t_fdf *info)
 				pointproject(info, info->map.matrix[j + 1][i]));
 		}
 	}
+	if (info->map.legend)
+		drawlegend(info);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img_ptr, 0, 0);
 }

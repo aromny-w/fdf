@@ -6,11 +6,17 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 21:43:49 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/31 22:26:52 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int	getdefaultcolor(int altitude)
+{
+	(void)altitude;
+	return (0xffffff);
+}
 
 static int	todecimal(char c)
 {
@@ -56,7 +62,8 @@ static int	parsenumber(t_fdf *info, char **str, int x, int y)
 	info->map.matrix[y][x].x = x;
 	info->map.matrix[y][x].y = y;
 	info->map.matrix[y][x].z = nbr * sign;
-	info->map.matrix[y][x].color = 0xffffff;
+	if (!**str)
+		info->map.matrix[y][x].color = getdefaultcolor(nbr * sign);
 	return (1);
 }
 

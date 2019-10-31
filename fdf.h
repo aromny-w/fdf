@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 00:14:35 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/10/31 23:49:21 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ typedef struct	s_cam
 	int		dist;
 	int		x_offset;
 	int		y_offset;
-	double	x_axis;
-	double	y_axis;
-	double	z_axis;
+	double	alpha;
+	double	beta;
+	double	gamma;
 }				t_cam;
 
 typedef struct	s_map
@@ -44,6 +44,8 @@ typedef struct	s_map
 	t_point	**matrix;
 	int		width;
 	int		height;
+	int		legend;
+	int		*color;
 }				t_map;
 
 typedef struct	s_fdf
