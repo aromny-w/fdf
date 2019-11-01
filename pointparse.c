@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 23:44:54 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 22:26:52 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 13:46:10 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	getdefaultcolor(int altitude)
 {
 	(void)altitude;
-	return (0xffffff);
+	return (WHITE);
 }
 
 static int	todecimal(char c)
@@ -34,9 +34,9 @@ static int	parsecolor(t_fdf *info, char **str, int x, int y)
 
 	if (!ft_isxdigit(**str))
 		return (0);
-	while (ft_isxdigit(**str) && (nbr >= 0x000000 && nbr <= 0xffffff))
+	while (ft_isxdigit(**str) && (nbr >= BLACK && nbr <= WHITE))
 		nbr = 16 * nbr + todecimal(*(*str)++);
-	if (**str || !(nbr >= 0x000000 && nbr <= 0xffffff))
+	if (**str || !(nbr >= BLACK && nbr <= WHITE))
 		return (0);
 	info->map.matrix[y][x].color = nbr;
 	return (1);

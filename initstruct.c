@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:46:09 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 23:56:33 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:50:10 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	initstruct(t_fdf *info)
 	&info->bits_per_pixel, &info->size_line, &info->endian);
 	info->cam.dist = (HEIGHT / info->map.height < WIDTH / info->map.width ?
 	HEIGHT / info->map.height : WIDTH / info->map.width) / 2;
-	if (!(info->map.color = (int *)malloc(sizeof(int))))
-		destroystruct(info, 1, 0);
-	*info->map.color = 0xffffff;
+	info->altitude = 1;
+	info->projection = isometric;
 	//
 }

@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 23:11:25 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 23:47:01 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:50:52 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,32 @@ static void	rotate(int key, t_cam *cam)
 		cam->beta -= 0.05;
 	if (key == 88)
 		cam->beta += 0.05;
-	if (key == 83 || key == 85)
+	if (key == 83 || key == 89)
 		cam->gamma += 0.05;
-	if (key == 89 || key == 92)
+	if (key == 85 || key == 92)
 		cam->gamma -= 0.05;
+	if (key == 87)
+	{
+		cam->alpha = 0;
+		cam->beta = 0;
+		cam->gamma = 0;
+	}
 }
 
 int			hotkeys(int key, t_fdf *info)
 {
-	if (key == 37)
-		info->map.legend += !info->map.legend ? 1 : -1;
+	if (key == 46)
+		info->menu += !info->menu ? 1 : -1;
 	if (key == 53)
 		terminate(info);
 	if (key >= 83 && key <= 92)
 		rotate(key, &info->cam);
 	if ((key == 69 || key == 78) || (key >= 123 && key <= 126))
 		move(key, &info->cam);
+	if (key == 116 && info->altitude > 0.05f)
+		info->altitude -= 0.05f;
+	if (key == 121)
+		info->altitude += 0.05f;
 	draw(info);
 	return (0);
 }

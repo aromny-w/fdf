@@ -6,16 +6,42 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 00:00:49 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:11:58 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	drawlegend(t_fdf *info)
+static void	printmenu(void *mlx_ptr, void *win_ptr)
 {
-	ft_bzero(info->data_addr, info->size_line * 300);
-	ft_memset(info->data_addr + 300 * info->size_line, 0xffffff, info->size_line);
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 700, WHITE, "        MENU         ");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 730, WHITE, "Arrows       Move cam");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 745, WHITE, "+/-          Zoom cam");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 760, WHITE, "Numpad       Rotate  ");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 775, WHITE, "Page Up/Down Altitude");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 790, WHITE, "M            Menu    ");
+	mlx_string_put(mlx_ptr, win_ptr, 1000, 805, WHITE, "Esc          Exit    ");
+}
+
+static void	drawmenu(t_fdf *info)
+{
+	size_t	x;
+	size_t	y;
+
+	y = 699;
+	while (++y < 825)
+	{
+		x = 999;
+		while (++x < 1215)
+		{
+			if ((x == 1000 || y == 700) || (x == 1214 || y == 824))
+				info->data_addr[x + y * WIDTH] = WHITE;
+			else
+				info->data_addr[x + y * WIDTH] = BLACK;
+		}
+	}
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img_ptr, 0, 0);
+	printmenu(info->mlx_ptr, info->win_ptr);
 }
 
 static void	drawline(t_fdf *info, t_point p1, t_point p2)
@@ -69,7 +95,7 @@ void		draw(t_fdf *info)
 				pointproject(info, info->map.matrix[j + 1][i]));
 		}
 	}
-	if (info->map.legend)
-		drawlegend(info);
+	if (info->menu)
+		return (drawmenu(info));
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, info->img_ptr, 0, 0);
 }
