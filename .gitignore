@@ -1,5 +1,4 @@
-.gitignore
+fdf
 **/*.o
 **/libft.a
-fdf
 **/.DS_Store
