@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:13:35 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 16:14:28 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 17:22:36 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ void		pointrotate(t_point *point, t_cam cam)
 	rotateyaxis(point, *point, cam.beta);
 	rotatezaxis(point, *point, cam.gamma);
 }
-

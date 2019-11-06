@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 23:11:25 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 16:50:52 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 17:22:59 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@ static int	terminate(t_fdf *info)
 {
 	destroystruct(info, 0, info->map.height);
 	exit(EXIT_SUCCESS);
+}
+
+static void	project(int key, t_cam *cam, t_fdf *info)
+{
+	cam->alpha = 0;
+	cam->beta = 0;
+	cam->gamma = 0;
+	if (key == 82)
+		info->projection = parallel;
+	if (key == 87)
+		info->projection = isometric;
 }
 
 static void	move(int key, t_cam *cam)
@@ -48,16 +59,12 @@ static void	rotate(int key, t_cam *cam)
 		cam->gamma += 0.05;
 	if (key == 85 || key == 92)
 		cam->gamma -= 0.05;
-	if (key == 87)
-	{
-		cam->alpha = 0;
-		cam->beta = 0;
-		cam->gamma = 0;
-	}
 }
 
 int			hotkeys(int key, t_fdf *info)
 {
+	if (key == 82 || key == 87)
+		project(key, &info->cam, info);
 	if (key == 46)
 		info->menu += !info->menu ? 1 : -1;
 	if (key == 53)

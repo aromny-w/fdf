@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 16:50:17 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/02 16:21:16 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@
 
 typedef enum
 {
+	parallel,
 	isometric,
-	downward
-}				t_proj;
+}	t_proj;
 
 typedef struct	s_point
 {
 	int		x;
 	int		y;
 	int		z;
-	int 	color;
+	int		color;
 }				t_point;
 
 typedef struct	s_cam
@@ -70,15 +70,15 @@ typedef struct	s_fdf
 	t_proj	projection;
 }				t_fdf;
 
-void	fdf(int	fd);
-void	initstruct(t_fdf *info);
-void	destroystruct(t_fdf *info, int status, int i);
-void	readinput(t_fdf *info, int fd, char *line);
-int		pointcount(char *str);
-int		pointparse(t_fdf *info, char *str, int x, int y);
-void	draw(t_fdf *info);
-t_point	pointproject(t_fdf *info, t_point s);
-void	pointrotate(t_point *point, t_cam cam);
-int		hotkeys(int key, t_fdf *info);
+void			fdf(int	fd);
+void			initstruct(t_fdf *info);
+void			destroystruct(t_fdf *info, int status, int i);
+void			readinput(t_fdf *info, int fd, char *line);
+int				pointcount(char *str);
+int				pointparse(t_fdf *info, char *str, int x, int y);
+void			draw(t_fdf *info);
+t_point			pointproject(t_fdf *info, t_point s);
+void			pointrotate(t_point *point, t_cam cam);
+int				hotkeys(int key, t_fdf *info);
 
 #endif

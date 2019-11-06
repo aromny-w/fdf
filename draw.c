@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 16:11:58 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/02 18:26:55 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 static void	printmenu(void *mlx_ptr, void *win_ptr)
 {
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 700, WHITE, "        MENU         ");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 730, WHITE, "Arrows       Move cam");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 745, WHITE, "+/-          Zoom cam");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 760, WHITE, "Numpad       Rotate  ");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 775, WHITE, "Page Up/Down Altitude");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 790, WHITE, "M            Menu    ");
-	mlx_string_put(mlx_ptr, win_ptr, 1000, 805, WHITE, "Esc          Exit    ");
+	char	*menu[9];
+
+	menu[0] = "            CONTROL MENU            ";
+	menu[1] = " Arrows         Move camera         ";
+	menu[2] = " +/-            Zoom camera         ";
+	menu[3] = " Numpad 1-4/6-9 Rotate figure       ";
+	menu[4] = " Numpad 0       Parallel projection ";
+	menu[5] = " Numpad 5       Isometric projection";
+	menu[6] = " Page Up/Down   Altitude change     ";
+	menu[7] = " M              Menu                ";
+	menu[8] = " Esc            Exit                ";
+	mlx_string_put(mlx_ptr, win_ptr, 815, 700, WHITE, menu[0]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 730, WHITE, menu[1]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 745, WHITE, menu[2]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 760, WHITE, menu[3]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 775, WHITE, menu[4]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 790, WHITE, menu[5]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 805, WHITE, menu[6]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 820, WHITE, menu[7]);
+	mlx_string_put(mlx_ptr, win_ptr, 815, 835, WHITE, menu[8]);
 }
 
 static void	drawmenu(t_fdf *info)
@@ -29,12 +42,12 @@ static void	drawmenu(t_fdf *info)
 	size_t	y;
 
 	y = 699;
-	while (++y < 825)
+	while (++y < 860)
 	{
-		x = 999;
-		while (++x < 1215)
+		x = 814;
+		while (++x < 1185)
 		{
-			if ((x == 1000 || y == 700) || (x == 1214 || y == 824))
+			if ((x == 815 || y == 700) || (x == 1184 || y == 859))
 				info->data_addr[x + y * WIDTH] = WHITE;
 			else
 				info->data_addr[x + y * WIDTH] = BLACK;

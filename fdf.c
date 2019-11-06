@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:29:53 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/31 23:26:57 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/02 18:29:27 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int			main(int argc, char **argv)
 	if (argc == 2)
 		fdf(open(argv[1], O_RDONLY));
 	else
-		ft_printf("Usage : ./fdf <filename>");
+		ft_printf("Usage : ./fdf <filename>\n");
 	exit(EXIT_SUCCESS);
 }

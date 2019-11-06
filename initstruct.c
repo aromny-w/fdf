@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:46:09 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/01 16:50:10 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:59:44 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ void	initstruct(t_fdf *info)
 	HEIGHT / info->map.height : WIDTH / info->map.width) / 2;
 	info->altitude = 1;
 	info->projection = isometric;
-	//
 }

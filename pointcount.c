@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 16:34:32 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 21:43:40 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:28:32 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	pointcount(char *str)
 	count = 0;
 	while (*str == ' ')
 		str++;
-	while (*str)
+	while (ft_isdigit(*str) || *str == ' ' || *str == '-')
 	{
 		count++;
 		if (*str == '-')
