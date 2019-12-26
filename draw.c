@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:30:46 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/02 18:26:55 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/26 20:19:57 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static void	drawmenu(t_fdf *info)
 
 static void	drawline(t_fdf *info, t_point p1, t_point p2)
 {
-	int		delta[2];
-	int		step[2];
-	int		error[2];
+	int	delta[2];
+	int	step[2];
+	int	error[2];
 
 	delta[0] = ft_abs(p1.x - p2.x);
 	delta[1] = ft_abs(p1.y - p2.y);

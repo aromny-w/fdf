@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readinput.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aromny-w <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 22:30:24 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/10/29 21:44:34 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/12/26 19:13:19 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		readinput(t_fdf *info, int fd, char *line)
 	t_list	*buf;
 
 	buf = NULL;
-	if (fd == -1)
+	if (fd == -1 || read(fd, 0, 0) == -1)
 		destroystruct(info, 1, 0);
 	while (get_next_line(fd, &line) == 1)
 	{

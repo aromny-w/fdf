@@ -6,7 +6,7 @@
 /*   By: aromny-w <aromny-w@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 23:30:02 by aromny-w          #+#    #+#             */
-/*   Updated: 2019/11/02 16:21:16 by aromny-w         ###   ########.fr       */
+/*   Updated: 2019/11/19 21:33:26 by aromny-w         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define BLACK 0x000000
 # define WHITE 0xffffff
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
